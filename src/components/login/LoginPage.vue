@@ -10,65 +10,29 @@
 
       <md-card-content>
         <div class="md-layout-row md-layout-wrap md-gutter">
-          <div class="md-flex md-flex-small-100">
-            <md-field :class="getValidationClass('firstName')">
-              <label for="first-name">First Name</label>
-              <md-input name="first-name" id="first-name" v-model="form.firstName" :disabled="sending"></md-input>
-              <span class="md-error" v-if="!$v.form.firstName.required">The first name is required</span>
-              <span class="md-error" v-else-if="!$v.form.firstName.minLength">The first name is too short</span>
-              <span class="md-error" v-else-if="!$v.form.firstName.maxLength">The first name is too slong</span>
-            </md-field>
-          </div>
-
-          <div class="md-flex md-flex-small-100">
-            <md-field :class="getValidationClass('lastName')">
-              <label for="last-name">Last Name</label>
-              <md-input name="last-name" id="last-name" v-model="form.lastName" :disabled="sending"></md-input>
-              <span class="md-error" v-if="!$v.form.lastName.required">The  last name is required</span>
-              <span class="md-error" v-else-if="!$v.form.lastName.minLength">The last name is too short</span>
-              <span class="md-error" v-else-if="!$v.form.lastName.maxLength">The last name is too slong</span>
-            </md-field>
-          </div>
-        </div>
 
         <div class="md-flex md-flex-small-100">
           <md-field :class="getValidationClass('userName')">
             <label for="user-name">User Name</label>
             <md-input name="user-name" id="user-name" v-model="form.userName"></md-input>
             <span class="md-error" v-if="!$v.form.userName.required">The  user name is required</span>
-            <span class="md-error" v-else-if="!$v.form.userName.minLength">The user name is too short</span>
-            <span class="md-error" v-else-if="!$v.form.userName.maxLength">The user name is too slong</span>
           </md-field>
         </div>
 
-        <md-field :class="getValidationClass('email')">
-          <label for="email">Email</label>
-          <md-input type="email" name="email" id="email" autocomplete="email" for="email" v-model="form.email">Email
-          </md-input>
-          <span class="md-error" v-if="!$v.form.email.email">It is not valid email</span>
-        </md-field>
 
         <md-field :class="getValidationClass('password')">
           <label for="password">Password</label>
           <md-input type="password" name="password" id="password" for="password" v-model="form.password">Password
           </md-input>
           <span class="md-error" v-if="!$v.form.password.required">The password is required</span>
-          <span class="md-error" v-else-if="!$v.form.password.minLength">The password is too short</span>
         </md-field>
 
-        <md-field :class="getValidationClass('confirmPassword')">
-          <label for="confirm-password">Confirm password</label>
-          <md-input type="password" name="confirm-password" id="confirm-password" for="confirm-password"
-                    v-model="form.confirmPassword">Confirm
-            password
-          </md-input>
-          <span class="md-error" v-if="!$v.form.confirmPassword.required">Please repeat password</span>
-          <span class="md-error" v-else-if="!$v.form.confirmPassword.sameAsPassword">Passwords must be identical.</span>
-        </md-field>
-
+          <md-switch v-model="form.rememberMe" class="md-primary">Remember Me</md-switch>
+        </div>
       </md-card-content>
+
       <md-card-actions>
-        <md-button type="submit" class="md-primary md-raised" :disabled="sending && !$v.form.valid" @click.prevent="validateUser">Sign Up</md-button>
+        <md-button type="submit" class="md-primary md-raised" :disabled="sending && !$v.form.valid" @click.prevent="validateUser">Log In</md-button>
       </md-card-actions>
 
     </form>
@@ -78,11 +42,7 @@
 <script>
   import {validationMixin} from 'vuelidate'
   import {
-    required,
-    email,
-    minLength,
-    maxLength,
-    sameAs
+    required
   } from 'vuelidate/lib/validators'
 
   export default {
@@ -90,44 +50,20 @@
     mixins: [validationMixin],
     data: () => ({
       form: {
-        firstName: null,
-        lastName: null,
         userName: null,
-        email: null,
         password: null,
-        confirmPassword: null
+        rememberMe: false
       },
       sending: false,
       userSaved: false
     }),
     validations: {
       form: {
-        firstName: {
-          required,
-          minLength: minLength(1),
-          maxLength: maxLength(25)
-        },
-        lastName: {
-          required,
-          minLength: minLength(3),
-          maxLength: maxLength(25)
-        },
         userName: {
-          required,
-          minLength: minLength(3),
-          maxLength: maxLength(20)
-        },
-        email: {
-          required,
-          email
+          required
         },
         password: {
-          required,
-          minLength: minLength(6)
-        },
-        confirmPassword: {
-          required,
-          sameAsPassword: sameAs('password')
+          required
         }
       }
     },
@@ -142,12 +78,8 @@
       },
       clearForm () {
         this.$v.$reset()
-        this.form.firstName = null
-        this.form.lastName = null
         this.form.userName = null
-        this.form.email = null
         this.form.password = null
-        this.form.confirmPassword = null
       },
       saveUser () {
         this.sending = true
