@@ -6,6 +6,7 @@ const bodyParser = require('body-parser');
 
 // Get our API routes
 const api = require('./routes/api');
+const login = require('./routes/login');
 
 const app = express();
 
@@ -14,14 +15,15 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
 // Point static path to dist
-app.use(express.static(path.join(__dirname, 'dist')));
+app.use(express.static(path.join(__dirname, '../dist')));
 
 // Set our api routes
 app.use('/api', api);
+app.use('/login', login);
 
 // Catch all other routes and return the index file
 app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, 'dist/index.html'));
+  res.sendFile(path.join(__dirname, '../dist/index.html'));
 });
 
 /**
