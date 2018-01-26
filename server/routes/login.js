@@ -9,11 +9,24 @@ const connection = db.createConnection({
   database: 'lunchqs'
 })
 
-router.get('/createdb', async (req, res) => {
-  const sql = 'CREATE TABLE  users( id int(11) NOT NULL AUTO_INCREMENT,  first_name varchar(100) COLLATE utf8_unicode_ci NOT NULL, last_name varchar(100) COLLATE utf8_unicode_ci NOT NULL, user_name varchar(100) COLLATE utf8_unicode_ci NOT NULL, password varchar(255) COLLATE utf8_unicode_ci NOT NULL, created datetime NOT NULL, modified datetime NOT NULL, PRIMARY KEY(id))'
-  const result = await connection.queryAsync(sql)
+router.post('/login', async (req, res) => {
+  const crdate = new Date()
+  const users = {
+    'first_name': req.body.first_name,
+    'last_name': req.body.last_name,
+    'user_name': req.body.user_name,
+    'email': req.body.email,
+    'password': req.body.password,
+    'created': crdate,
+    'modified': crdate
+  }
+  const sql = ('INSERT INTO users SET ?', users)
+  const result = await connection(sql)
+  res.send({
+    'code': 200,
+    'success': 'User registered sucessfully'
+  })
   console.log(result)
-  res.send('Database created ...')
 })
 
 module.exports = router

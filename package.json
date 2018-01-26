@@ -13,8 +13,11 @@
   "dependencies": {
     "body-parser": "^1.18.2",
     "express": "^4.16.2",
+    "express-oauth-server": "^2.0.0",
+    "oauth2-server": "^3.0.0",
     "vue": "^2.5.2",
     "vue-material": "^1.0.0-beta-7",
+    "vue-resource": "^1.3.5",
     "vue-router": "^3.0.1",
     "vuelidate": "^0.6.1"
   },

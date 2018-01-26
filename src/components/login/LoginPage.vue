@@ -4,7 +4,7 @@
     <form class="md-layout-row md-gutter" novalidate @submit.prevent="validateUser">
       <md-card class="md-flex-50 md-flex-small-100">
         <md-card-header>
-          <div class="md-title">Sign Up</div>
+          <div class="md-title">Login</div>
         </md-card-header>
       </md-card>
 

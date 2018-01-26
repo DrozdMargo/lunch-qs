@@ -154,10 +154,22 @@
         window.setTimeout(() => {
           this.userSaved = true
           this.sending = false
-          this.clearForm()
+          //this.clearForm()
         }, 1500)
       },
       validateUser () {
+        const form = this.form
+        const data = new FormData()
+        data.append('first_name', form.first_name)
+        data.append('last_name', form.last_name)
+        data.append('user_name', form.user_name)
+        data.append('email', form.email)
+        data.append('password', form.password)
+        this.$http.post('/api/login', data).then(response => {
+          this.data = response.body
+        }, response => {
+         console.log(response)
+        })
         this.$v.$touch()
         if (!this.$v.$invalid) {
           this.saveUser()
