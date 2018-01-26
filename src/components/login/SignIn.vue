@@ -68,7 +68,9 @@
 
       </md-card-content>
       <md-card-actions>
-        <md-button type="submit" class="md-primary md-raised" :disabled="sending && !$v.form.valid" @click.prevent="validateUser">Sign Up</md-button>
+        <md-button type="submit" class="md-primary md-raised" :disabled="sending && !$v.form.valid"
+                   @click.prevent="validateUser">Sign Up
+        </md-button>
       </md-card-actions>
 
     </form>
@@ -154,7 +156,6 @@
         window.setTimeout(() => {
           this.userSaved = true
           this.sending = false
-          //this.clearForm()
         }, 1500)
       },
       validateUser () {
@@ -165,11 +166,9 @@
         data.append('user_name', form.user_name)
         data.append('email', form.email)
         data.append('password', form.password)
-        this.$http.post('/api/login', data).then(response => {
-          this.data = response.body
-        }, response => {
-         console.log(response)
-        })
+        this.$http.post('http://localhost:3000/api', data).then(response => {
+          console.log(response)
+        }).then()
         this.$v.$touch()
         if (!this.$v.$invalid) {
           this.saveUser()

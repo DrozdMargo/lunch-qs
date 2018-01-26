@@ -6,6 +6,7 @@ import LoginPage from '@/components/login/LoginPage'
 Vue.use(Router)
 
 export default new Router({
+  mode: 'history',
   routes: [
     {
       path: '/',

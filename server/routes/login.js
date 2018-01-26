@@ -21,7 +21,7 @@ router.post('/login', async (req, res) => {
     'modified': crdate
   }
   const sql = ('INSERT INTO users SET ?', users)
-  const result = await connection(sql)
+  const result = await connection.query(sql)
   res.send({
     'code': 200,
     'success': 'User registered sucessfully'
