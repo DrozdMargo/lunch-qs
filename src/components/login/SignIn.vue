@@ -11,33 +11,33 @@
       <md-card-content>
         <div class="md-layout-row md-layout-wrap md-gutter">
           <div class="md-flex md-flex-small-100">
-            <md-field :class="getValidationClass('firstName')">
+            <md-field :class="getValidationClass('first_name')">
               <label for="first-name">First Name</label>
-              <md-input name="first-name" id="first-name" v-model="form.firstName" :disabled="sending"></md-input>
-              <span class="md-error" v-if="!$v.form.firstName.required">The first name is required</span>
-              <span class="md-error" v-else-if="!$v.form.firstName.minLength">The first name is too short</span>
-              <span class="md-error" v-else-if="!$v.form.firstName.maxLength">The first name is too slong</span>
+              <md-input name="first-name" id="first-name" v-model="form.first_name" :disabled="sending"></md-input>
+              <span class="md-error" v-if="!$v.form.first_name.required">The first name is required</span>
+              <span class="md-error" v-else-if="!$v.form.first_name.minLength">The first name is too short</span>
+              <span class="md-error" v-else-if="!$v.form.first_name.maxLength">The first name is too slong</span>
             </md-field>
           </div>
 
           <div class="md-flex md-flex-small-100">
-            <md-field :class="getValidationClass('lastName')">
+            <md-field :class="getValidationClass('last_name')">
               <label for="last-name">Last Name</label>
-              <md-input name="last-name" id="last-name" v-model="form.lastName" :disabled="sending"></md-input>
-              <span class="md-error" v-if="!$v.form.lastName.required">The  last name is required</span>
-              <span class="md-error" v-else-if="!$v.form.lastName.minLength">The last name is too short</span>
-              <span class="md-error" v-else-if="!$v.form.lastName.maxLength">The last name is too slong</span>
+              <md-input name="last-name" id="last-name" v-model="form.last_name" :disabled="sending"></md-input>
+              <span class="md-error" v-if="!$v.form.last_name.required">The  last name is required</span>
+              <span class="md-error" v-else-if="!$v.form.last_name.minLength">The last name is too short</span>
+              <span class="md-error" v-else-if="!$v.form.last_name.maxLength">The last name is too slong</span>
             </md-field>
           </div>
         </div>
 
         <div class="md-flex md-flex-small-100">
-          <md-field :class="getValidationClass('userName')">
+          <md-field :class="getValidationClass('user_name')">
             <label for="user-name">User Name</label>
-            <md-input name="user-name" id="user-name" v-model="form.userName"></md-input>
-            <span class="md-error" v-if="!$v.form.userName.required">The  user name is required</span>
-            <span class="md-error" v-else-if="!$v.form.userName.minLength">The user name is too short</span>
-            <span class="md-error" v-else-if="!$v.form.userName.maxLength">The user name is too slong</span>
+            <md-input name="user-name" id="user-name" v-model="form.user_name"></md-input>
+            <span class="md-error" v-if="!$v.form.user_name.required">The  user name is required</span>
+            <span class="md-error" v-else-if="!$v.form.user_name.minLength">The user name is too short</span>
+            <span class="md-error" v-else-if="!$v.form.user_name.maxLength">The user name is too slong</span>
           </md-field>
         </div>
 
@@ -93,9 +93,9 @@
     mixins: [validationMixin],
     data: () => ({
       form: {
-        firstName: null,
-        lastName: null,
-        userName: null,
+        first_name: null,
+        last_name: null,
+        user_name: null,
         email: null,
         password: null,
         confirmPassword: null
@@ -105,17 +105,17 @@
     }),
     validations: {
       form: {
-        firstName: {
+        first_name: {
           required,
           minLength: minLength(1),
           maxLength: maxLength(25)
         },
-        lastName: {
+        last_name: {
           required,
           minLength: minLength(3),
           maxLength: maxLength(25)
         },
-        userName: {
+        user_name: {
           required,
           minLength: minLength(3),
           maxLength: maxLength(20)
@@ -145,9 +145,9 @@
       },
       clearForm () {
         this.$v.$reset()
-        this.form.firstName = null
-        this.form.lastName = null
-        this.form.userName = null
+        this.form.first_name = null
+        this.form.last_name = null
+        this.form.user_name = null
         this.form.email = null
         this.form.password = null
         this.form.confirmPassword = null
@@ -161,6 +161,7 @@
       },
       validateUser () {
         const form = this.form
+        console.log(form)
         axios.post('http://localhost:3000/login', {
           body: form
         }).then(response => {

@@ -8,6 +8,7 @@ const connection = db.createConnection({
 })
 
 module.exports = async (req, res) => {
+  console.log(req, req.body)
   const crdate = new Date()
   const users = {
     'first_name': req.body.first_name,
@@ -18,8 +19,7 @@ module.exports = async (req, res) => {
     'created': crdate,
     'modified': crdate
   }
-  const sql = ('INSERT INTO users SET ?', users)
-  const result = await connection.query(sql)
+  const result = await connection.queryAsync('INSERT INTO users SET ?', users)
   res.send({
     'code': 200,
     'success': 'User registered sucessfully'

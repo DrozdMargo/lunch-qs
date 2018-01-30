@@ -12,10 +12,10 @@
         <div class="md-layout-row md-layout-wrap md-gutter">
 
         <div class="md-flex md-flex-small-100">
-          <md-field :class="getValidationClass('userName')">
+          <md-field :class="getValidationClass('user_name')">
             <label for="user-name">User Name</label>
-            <md-input name="user-name" id="user-name" v-model="form.userName"></md-input>
-            <span class="md-error" v-if="!$v.form.userName.required">The  user name is required</span>
+            <md-input name="user-name" id="user-name" v-model="form.user_name"></md-input>
+            <span class="md-error" v-if="!$v.form.user_name.required">The  user name is required</span>
           </md-field>
         </div>
 
@@ -50,7 +50,7 @@
     mixins: [validationMixin],
     data: () => ({
       form: {
-        userName: null,
+        user_name: null,
         password: null,
         rememberMe: false
       },
@@ -59,7 +59,7 @@
     }),
     validations: {
       form: {
-        userName: {
+        user_name: {
           required
         },
         password: {
@@ -78,7 +78,7 @@
       },
       clearForm () {
         this.$v.$reset()
-        this.form.userName = null
+        this.form.user_name = null
         this.form.password = null
       },
       saveUser () {
