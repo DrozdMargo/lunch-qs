@@ -152,25 +152,19 @@
         this.form.password = null
         this.form.confirmPassword = null
       },
-      saveUser () {
+      saveUser (form) {
         this.sending = true
-        window.setTimeout(() => {
-          this.userSaved = true
-          this.sending = false
-        }, 1500)
-      },
-      validateUser () {
-        const form = this.form
-        console.log(form)
-        axios.post('http://localhost:3000/login', {
-          body: form
-        }).then(response => {
+        axios.post('http://localhost:3000/login', form).then(response => {
+          console.log(response)
         }).catch(e => {
           this.errors.push(e)
         })
+      },
+      validateUser () {
+        const form = this.form
         this.$v.$touch()
         if (!this.$v.$invalid) {
-          this.saveUser()
+          this.saveUser(form)
         }
       }
     }

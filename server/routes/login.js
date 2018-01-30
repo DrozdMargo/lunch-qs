@@ -8,7 +8,6 @@ const connection = db.createConnection({
 })
 
 module.exports = async (req, res) => {
-  console.log(req, req.body)
   const crdate = new Date()
   const users = {
     'first_name': req.body.first_name,
