@@ -79,6 +79,7 @@
 
 <script>
   import {validationMixin} from 'vuelidate'
+  import axios from 'axios'
   import {
     required,
     email,
@@ -160,15 +161,12 @@
       },
       validateUser () {
         const form = this.form
-        const data = new FormData()
-        data.append('first_name', form.first_name)
-        data.append('last_name', form.last_name)
-        data.append('user_name', form.user_name)
-        data.append('email', form.email)
-        data.append('password', form.password)
-        this.$http.post('http://localhost:3000/api', data).then(response => {
-          console.log(response)
-        }).then()
+        axios.post('http://localhost:3000/login', {
+          body: form
+        }).then(response => {
+        }).catch(e => {
+          this.errors.push(e)
+        })
         this.$v.$touch()
         if (!this.$v.$invalid) {
           this.saveUser()
