@@ -1,11 +1,4 @@
-const db = require('../services/db')
-
-const connection = db.createConnection({
-  host: '127.0.0.1',
-  user: 'root',
-  password: '25prime25',
-  database: 'lunchqs'
-})
+const connection = require('../services/db')
 
 module.exports = async (req, res) => {
   const crdate = new Date()
