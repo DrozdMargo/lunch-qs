@@ -154,7 +154,7 @@
       },
       saveUser (form) {
         this.sending = true
-        axios.post('http://localhost:3000/login', form).then(response => {
+        axios.post('http://localhost:3000/signup', form).then(response => {
           console.log(response)
         }).catch(e => {
           this.errors.push(e)

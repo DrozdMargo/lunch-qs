@@ -41,6 +41,7 @@
 
 <script>
   import {validationMixin} from 'vuelidate'
+  import axios from 'axios'
   import {
     required
   } from 'vuelidate/lib/validators'
@@ -81,18 +82,18 @@
         this.form.user_name = null
         this.form.password = null
       },
-      saveUser () {
+      saveUser (form) {
         this.sending = true
-        window.setTimeout(() => {
-          this.userSaved = true
-          this.sending = false
-          this.clearForm()
-        }, 1500)
+        axios.post('http://localhost:3000/login', form).then(response => {
+          console.log(response)
+        }).catch(e => {
+          this.errors.push(e)
+        })
       },
       validateUser () {
         this.$v.$touch()
         if (!this.$v.$invalid) {
-          this.saveUser()
+          this.saveUser(this.form)
         }
       }
     }
