@@ -1,16 +1,19 @@
 const bcrypt = require('bcrypt')
 const connection = require('../services/db')
+const jwt = require('jsonwebtoken')
+const asyncMiddleware = require('../utils/asyncMiddleware')
 
-module.exports = async (req, res) => {
+module.exports = asyncMiddleware(async (req, res) => {
   const hash = bcrypt.hashSync(req.body.password, 10)
-  const users = {
-    'user_name': req.body.user_name,
-    'password': hash
+  const result = await connection.queryAsync('SELECT * FROM users WHERE user_name=? AND password=?', [req.body.user_name, hash])
+  if (result.length) {
+    console.log(result[0].id)
+  } else {
+    console.log('wrong credentials')
   }
-  const result = await connection.queryAsync('SELECT * from users', users)
+  console.log(result)
   res.send({
     'code': 200,
-    'success': 'User registered sucessfully'
+    'success': 'User login'
   })
-  console.log(result)
-}
+})
