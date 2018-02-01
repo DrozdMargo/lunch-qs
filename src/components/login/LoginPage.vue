@@ -11,28 +11,30 @@
       <md-card-content>
         <div class="md-layout-row md-layout-wrap md-gutter">
 
-        <div class="md-flex md-flex-small-100">
-          <md-field :class="getValidationClass('user_name')">
-            <label for="user-name">User Name</label>
-            <md-input name="user-name" id="user-name" v-model="form.user_name"></md-input>
-            <span class="md-error" v-if="!$v.form.user_name.required">The  user name is required</span>
+          <div class="md-flex md-flex-small-100">
+            <md-field :class="getValidationClass('user_name')">
+              <label for="user-name">User Name</label>
+              <md-input name="user-name" id="user-name" v-model="form.user_name"></md-input>
+              <span class="md-error" v-if="!$v.form.user_name.required">The  user name is required</span>
+            </md-field>
+          </div>
+
+
+          <md-field :class="getValidationClass('password')">
+            <label for="password">Password</label>
+            <md-input type="password" name="password" id="password" for="password" v-model="form.password">Password
+            </md-input>
+            <span class="md-error" v-if="!$v.form.password.required">The password is required</span>
           </md-field>
-        </div>
-
-
-        <md-field :class="getValidationClass('password')">
-          <label for="password">Password</label>
-          <md-input type="password" name="password" id="password" for="password" v-model="form.password">Password
-          </md-input>
-          <span class="md-error" v-if="!$v.form.password.required">The password is required</span>
-        </md-field>
 
           <md-switch v-model="form.rememberMe" class="md-primary">Remember Me</md-switch>
         </div>
       </md-card-content>
 
       <md-card-actions>
-        <md-button type="submit" class="md-primary md-raised" :disabled="sending && !$v.form.valid" @click.prevent="validateUser">Log In</md-button>
+        <md-button type="submit" class="md-primary md-raised" :disabled="sending && !$v.form.valid"
+                   @click.prevent="validateUser">Log In
+        </md-button>
       </md-card-actions>
 
     </form>
@@ -87,7 +89,7 @@
         axios.post('http://localhost:3000/login', form).then(response => {
           console.log(response)
         }).catch(e => {
-          this.errors.push(e)
+          console.log(e)
         })
       },
       validateUser () {
