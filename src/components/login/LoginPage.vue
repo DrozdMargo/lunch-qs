@@ -87,6 +87,9 @@
       saveUser (form) {
         this.sending = true
         axios.post('http://localhost:3000/login', form).then(response => {
+          if (!response.data.errors) {
+            console.log('no errors')
+          }
           console.log(response)
         }).catch(e => {
           console.log(e)

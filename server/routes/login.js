@@ -15,6 +15,6 @@ module.exports = asyncMiddleware(async (req, res) => {
       res.send({error: 'wrong password'})
     }
   } else {
-    console.log('wrong credentials')
+    res.send({error: 'wrong password and user name'})
   }
 })

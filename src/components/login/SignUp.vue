@@ -89,7 +89,7 @@
   } from 'vuelidate/lib/validators'
 
   export default {
-    name: 'SignIn',
+    name: 'SignUp',
     mixins: [validationMixin],
     data: () => ({
       form: {
