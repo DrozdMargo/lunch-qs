@@ -1,7 +1,9 @@
 <template>
   <div class="home-page">
     <header-wrap></header-wrap>
-    <md-content></md-content>
+    <md-content>
+      <h1>dgfsfg</h1>
+    </md-content>
     <footer-wrap></footer-wrap>
   </div>
 </template>
@@ -21,8 +23,11 @@
   }
 </script>
 
-<style scoped>
+<style lang="scss">
 .md-content{
   height: 100%;
+  h1{
+    font-size: 22px;
+  }
 }
 </style>

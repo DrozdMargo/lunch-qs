@@ -78,5 +78,14 @@ module.exports = {
       target: 'http://localhost:3000',
       pathRewrite: {'^/api': ''}
     }
+  },
+  rules: {
+    test: /\.vue$/,
+    loader: 'vue-loader',
+    options: {
+      loaders: {
+        scss: 'vue-style-loader!css-loader!sass-loader'
+      }
+    }
   }
 }
