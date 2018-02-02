@@ -1,7 +1,7 @@
-const { hashSync, compare } = require('bcrypt')
+const { hash, compare } = require('bcrypt')
 const { promisify } = require('util')
 
 module.exports = {
-  hash: promisify(hashSync),
+  hash: promisify(hash),
   compare: promisify(compare)
 }
