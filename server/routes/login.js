@@ -7,14 +7,13 @@ module.exports = asyncMiddleware(async (req, res) => {
   if (user.length) {
     const comparePassword = await compare(req.body.password, user[0].password)
     if (comparePassword) {
-      res.send({
-        'code': 200,
-        'success': 'User login'
+      res.status(200).send({
+        success: 'user logged in'
       })
     } else {
-      res.send({error: 'wrong password'})
+      res.status(401).json({message: 'Authentication failed. Wrong password.'})
     }
   } else {
-    res.send({error: 'wrong password and user name'})
+    res.status(401).json({ message: 'Authentication failed. User not found.' })
   }
 })

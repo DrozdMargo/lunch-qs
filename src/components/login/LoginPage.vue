@@ -25,6 +25,7 @@
             <md-input type="password" name="password" id="password" for="password" v-model="form.password">Password
             </md-input>
             <span class="md-error" v-if="!$v.form.password.required">The password is required</span>
+            <span class="md-error" v-else-if="serverError">{{ msgError }}</span>
           </md-field>
 
           <md-switch v-model="form.rememberMe" class="md-primary">Remember Me</md-switch>
@@ -58,7 +59,9 @@
         rememberMe: false
       },
       sending: false,
-      userSaved: false
+      userSaved: false,
+      msgError: null,
+      serverError: false
     }),
     validations: {
       form: {
@@ -87,12 +90,16 @@
       saveUser (form) {
         this.sending = true
         axios.post('http://localhost:3000/login', form).then(response => {
-          if (!response.data.errors) {
-            console.log('no errors')
+          if (response.data.success) {
+            this.$router.push('/')
           }
-          console.log(response)
         }).catch(e => {
-          console.log(e)
+          this.sending = false
+          this.serverError = true
+          if (e.response.status === 401) {
+            this.msgError = e.response.data.error
+            // @todo displaying server errors
+          }
         })
       },
       validateUser () {

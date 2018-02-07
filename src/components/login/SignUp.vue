@@ -154,11 +154,18 @@
       },
       saveUser (form) {
         this.sending = true
-        axios.post('http://localhost:3000/signup', form).then(response => {
-          console.log(response)
-        }).catch(e => {
-          this.errors.push(e)
-        })
+        axios.post('http://localhost:3000/signup', form)
+          .then(response => {
+            if (response.data.success) {
+              this.$router.push('/')
+            }
+          })
+          .catch(e => {
+            if (e.response.status === 401) {
+              this.msgError = e.response.data.error
+              // @todo displaying server errors
+            }
+          })
       },
       validateUser () {
         const form = this.form
