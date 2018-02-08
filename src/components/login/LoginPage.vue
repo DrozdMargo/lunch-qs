@@ -91,6 +91,7 @@
         this.sending = true
         axios.post('http://localhost:3000/login', form).then(response => {
           if (response.data.success) {
+            console.log(response)
             this.$router.push('/')
           }
         }).catch(e => {

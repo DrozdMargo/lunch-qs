@@ -11,11 +11,12 @@ app.use(bodyParser.urlencoded({ extended: false }))
 
 app.use(express.static(path.join(__dirname, '../dist')))
 app.use(cors())
-app.use(require('./routes'))
 
 // app.get('*', (req, res) => {
 //   res.sendFile(path.join(__dirname, '../dist/index.html'))
 // })
+
+app.use(require('./routes'))
 
 const port = process.env.PORT || '3000'
 app.set('port', port)

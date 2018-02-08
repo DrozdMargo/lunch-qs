@@ -15,6 +15,7 @@ module.exports = asyncMiddleware(async (req, res) => {
     'modified': crdate
   }
   const result = await connection.queryAsync('INSERT INTO users SET ?', users)
+  console.log(res)
   res.send({
     'code': 200,
     'success': 'User registered sucessfully'
