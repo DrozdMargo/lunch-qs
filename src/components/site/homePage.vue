@@ -13,7 +13,7 @@
 <script>
   import Footer from '../site/footer.vue'
   import Header from '../site/header.vue'
-  import axios from 'axios'
+  import * as http from '../services/http'
 
   export default {
     name: 'HomePage',
@@ -26,7 +26,7 @@
     }),
     methods: {
       getUsers () {
-        axios.get('http://localhost:3000/users')
+        http.get('/users')
           .then(response => {
             this.userList = response.data.users
             console.log(response.data.users)

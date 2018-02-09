@@ -10,13 +10,13 @@ module.exports = asyncMiddleware(async (req, res) => {
     const comparePassword = await compare(req.body.password, user[0].password)
     if (comparePassword) {
       const payload = {
-        name: user.user_name
+        userId: user.id
       }
       const token = jwt.sign(payload, 'superSecret', {expiresIn: '1h'})
       res.status(200).json({
         success: true,
         message: 'user logged in',
-        token: token
+        token
       })
     } else {
       res.status(401).json({ message: 'Authentication failed. Wrong password.' })

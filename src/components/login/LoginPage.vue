@@ -44,7 +44,7 @@
 
 <script>
   import {validationMixin} from 'vuelidate'
-  import axios from 'axios'
+  import * as http from '../services/http'
   import {
     required
   } from 'vuelidate/lib/validators'
@@ -78,7 +78,7 @@
         const field = this.$v.form[fieldName]
         if (field) {
           return {
-            'md-invalid': field.$invalid && field.$dirty
+            'md-invalid': (field.$invalid && field.$dirty) || this.serverError
           }
         }
       },
@@ -89,8 +89,11 @@
       },
       saveUser (form) {
         this.sending = true
-        axios.post('http://localhost:3000/login', form).then(response => {
+        http.post('/login', form).then(response => {
           if (response.data.success) {
+            const token = response.data.token
+            http.defaults.headers.common['Authorization'] = `Bearer ${token}`
+            localStorage.setItem('token', token)
             console.log(response)
             this.$router.push('/')
           }
@@ -98,7 +101,7 @@
           this.sending = false
           this.serverError = true
           if (e.response.status === 401) {
-            this.msgError = e.response.data.error
+            this.msgError = e.response.data.message
             // @todo displaying server errors
           }
         })
