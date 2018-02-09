@@ -1,9 +1,10 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import SignUp from '@/components/login/SignUp'
-import LoginPage from '@/components/login/LoginPage'
+import Login from '@/components/login/Login'
 import HomePage from '@/components/site/HomePage'
-import UserComponent from '@/components/user-menu/UserComponent'
+import Menu from '@/components/user-menu/Menu'
+import FriendOrder from '@/components/user-menu/FriendOrder'
 
 Vue.use(Router)
 
@@ -22,13 +23,25 @@ export default new Router({
     },
     {
       path: '/login',
-      name: 'LoginPage',
-      component: LoginPage
+      name: 'Login',
+      component: Login
     },
     {
-      path: '/user',
-      name: 'UserComponent',
-      component: UserComponent
+      path: '/menu',
+      name: 'menu',
+      component: Menu
+    },
+    {
+      path: '/friend-order',
+      name: 'friend-order',
+      component: FriendOrder,
+      beforeEnter: (to, from, next) => {
+        if (!localStorage.getItem('token')) {
+          next('/login')
+        } else {
+          next()
+        }
+      }
     }
   ]
 })

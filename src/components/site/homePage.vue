@@ -2,7 +2,20 @@
   <div class="home-page">
     <header-wrap></header-wrap>
     <md-content>
-      <h1>dgfsfg</h1>
+
+      <router-link to="/login">
+        login
+      </router-link>
+      <router-link to="/signup">
+        signup
+      </router-link>
+      <router-link to="/menu">
+        menu
+      </router-link>
+      <router-link to="/friend-order">
+       friend
+      </router-link>
+
       <md-button class="md-accent" @click="getUsers">get users</md-button>
       <div>{{ userList }}</div>
     </md-content>
@@ -39,10 +52,10 @@
 </script>
 
 <style lang="scss">
-.md-content{
-  height: 100%;
-  h1{
-    font-size: 22px;
+  .md-content {
+    height: 100%;
+    h1 {
+      font-size: 22px;
+    }
   }
-}
 </style>

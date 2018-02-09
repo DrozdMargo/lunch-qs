@@ -1,24 +1,26 @@
 <template>
-  <!--<div class="page-container"></div>-->
   <md-app>
     <md-app-toolbar class="md-primary">
       <span class="md-title">My Title</span>
-      <md-button @click="signOut()">LogOut</md-button>
+        <logout v-if="userLogin"></logout>
     </md-app-toolbar>
   </md-app>
 </template>
 
 <script>
+  import Logout from '../site/Logout'
+
   export default {
     name: 'Header',
+    components: {
+      'logout': Logout
+    },
     data: () => ({
+      userLogin: null
     }),
-    methods: {
-      signOut () {
-        if (localStorage.token) {
-          localStorage.token = null
-          this.$router.push('/login')
-        }
+    mounted () {
+      if (localStorage.getItem('token')) {
+        this.userLogin = true
       }
     }
   }
