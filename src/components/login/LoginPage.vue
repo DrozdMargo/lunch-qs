@@ -25,10 +25,12 @@
             <md-input type="password" name="password" id="password" for="password" v-model="form.password">Password
             </md-input>
             <span class="md-error" v-if="!$v.form.password.required">The password is required</span>
-            <span class="md-error" v-else-if="serverError">{{ msgError }}</span>
           </md-field>
 
-          <md-switch v-model="form.rememberMe" class="md-primary">Remember Me</md-switch>
+          <span class="md-error server-errors" v-if="serverError">{{ msgError }}</span>
+
+          <md-switch v-model="form.rememberMe" class="md-primary switch-full-width">Remember Me</md-switch>
+
         </div>
       </md-card-content>
 
@@ -140,4 +142,13 @@
     width: 600px;
     margin: 0 auto;
   }
+  .server-errors {
+    width: 100%;
+    color: #ff1744;
+  }
+
+  .switch-full-width {
+    width: 100%;
+  }
+
 </style>

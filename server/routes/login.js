@@ -1,5 +1,5 @@
 const connection = require('../services/db')
-const asyncMiddleware = require('../utils/asyncMiddleware')
+const asyncMiddleware = require('../middleware/asyncMiddleware')
 const { compare } = require('../services/password')
 const jwt = require('jsonwebtoken')
 
@@ -12,7 +12,7 @@ module.exports = asyncMiddleware(async (req, res) => {
       const payload = {
         userId: user.id
       }
-      const token = jwt.sign(payload, 'superSecret', {expiresIn: '1h'})
+      const token = jwt.sign(payload, 'superSecret', {expiresIn: '2h'})
       res.status(200).json({
         success: true,
         message: 'user logged in',

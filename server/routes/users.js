@@ -1,5 +1,5 @@
 const connection = require('../services/db')
-const asyncMiddleware = require('../utils/asyncMiddleware')
+const asyncMiddleware = require('../middleware/asyncMiddleware')
 
 module.exports = asyncMiddleware(async (req, res) => {
   console.log(req)

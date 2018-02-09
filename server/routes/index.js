@@ -1,6 +1,6 @@
 const express = require('express')
 const router = express.Router()
-const loginRequired = require('./loginRequired')
+const loginRequired = require('../middleware/loginRequired')
 
 router.post('/login', require('./login'))
 router.post('/signup', require('./signup'))
