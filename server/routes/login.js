@@ -19,9 +19,9 @@ module.exports = asyncMiddleware(async (req, res) => {
         token
       })
     } else {
-      res.status(401).json({ message: 'Authentication failed. Wrong password.' })
+      res.status(401).json({ message: 'Wrong password' })
     }
   } else {
-    res.status(401).json({ message: 'Authentication failed. User not found.' })
+    res.status(401).json({ message: 'User not found' })
   }
 })
